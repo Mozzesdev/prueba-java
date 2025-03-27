@@ -1,10 +1,6 @@
-package me.winflix;
+package me.winflix.magazine;
 
-public class Challenge {
-
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
+public class Magazine {
 
     public static boolean canWrite(String note, String magazine) {
         int[] magazineCounts = new int[65536]; // 1. Arreglo para contar todos los caracteres Unicode (16 bits)

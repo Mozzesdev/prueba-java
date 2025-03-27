@@ -1,27 +1,28 @@
-package me.winflix;
+package me.winflix.magazine;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ChallengeTest {
+class MagazineTest {
 
     // ------------------- CASO BÁSICO 1 -------------------
     @Test
     void canWrite_EmptyNote_ReturnsTrue() {
         // Prueba que una nota vacía siempre se puede escribir
         // Independientemente del contenido de la revista
-        assertTrue(Challenge.canWrite("", "abc"));
+        assertTrue(Magazine.canWrite("", "abc"));
     }
 
     // ------------------- CASO BÁSICO 2 -------------------
     @Test
     void canWrite_EmptyMagazine_ReturnsFalse() {
         // Verifica que no se puede escribir una nota no vacía si la revista está vacía
-        assertFalse(Challenge.canWrite("a", ""));
+        assertFalse(Magazine.canWrite("a", ""));
     }
 
     // ------------------- PRUEBAS PARAMETRIZADAS -------------------
@@ -39,7 +40,7 @@ class ChallengeTest {
     void parameterizedTests(String note, String magazine, boolean expected) {
         // Prueba múltiples escenarios con diferentes combinaciones usando datos
         // proporcionados en formato CSV
-        assertEquals(expected, Challenge.canWrite(note, magazine));
+        assertEquals(expected, Magazine.canWrite(note, magazine));
     }
 
     // ------------------- CASO DE TAMAÑO -------------------
@@ -49,7 +50,7 @@ class ChallengeTest {
         // tamaño imposible)
         String magazine = "abc";
         String note = "a".repeat(magazine.length() + 1); // Nota de 4 caracteres vs revista de 3
-        assertFalse(Challenge.canWrite(note, magazine));
+        assertFalse(Magazine.canWrite(note, magazine));
     }
 
     // ------------------- PRUEBA DE RENDIMIENTO -------------------
@@ -61,7 +62,7 @@ class ChallengeTest {
         // Verifica que el algoritmo maneja eficientemente grandes inputs
         String magazine = "a".repeat(1_000_000) + "b".repeat(500_000);
         String note = "a".repeat(999_999) + "b".repeat(499_999);
-        assertTrue(Challenge.canWrite(note, magazine));
+        assertTrue(Magazine.canWrite(note, magazine));
     }
 
     // ------------------- CARACTERES ESPECIALES -------------------
@@ -69,9 +70,9 @@ class ChallengeTest {
     void canWrite_SpecialCharacters() {
         // Prueba caracteres no alfanuméricos:
         // Caso 1: Símbolos especiales (!@#$%^) presentes en la revista
-        assertTrue(Challenge.canWrite("!@#$%^", "!@#$%^&*()"));
+        assertTrue(Magazine.canWrite("!@#$%^", "!@#$%^&*()"));
 
         // Caso 2: Carácter Unicode (π griega) no presente en la revista
-        assertFalse(Challenge.canWrite("π", "3.1416"));
+        assertFalse(Magazine.canWrite("π", "3.1416"));
     }
 }
