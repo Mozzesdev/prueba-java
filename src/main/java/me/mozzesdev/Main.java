@@ -1,13 +1,13 @@
-package me.winflix;
+package me.mozzesdev;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
-import me.winflix.magazine.Magazine;
-import me.winflix.magazine.MagazineCase;
-import me.winflix.notification.Notification;
-import me.winflix.notification.Student;
+import me.mozzesdev.magazine.Magazine;
+import me.mozzesdev.magazine.MagazineCase;
+import me.mozzesdev.notification.Notification;
+import me.mozzesdev.notification.Student;
 
 public class Main {
     public static void main(String[] args) {

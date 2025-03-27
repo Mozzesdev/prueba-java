@@ -1,4 +1,4 @@
-package me.winflix.magazine;
+package me.mozzesdev.magazine;
 
 public class MagazineCase {
     String note;

@@ -1,4 +1,4 @@
-package me.winflix.notification;
+package me.mozzesdev.notification;
 
 import java.util.Objects;
 

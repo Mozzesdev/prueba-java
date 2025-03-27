@@ -1,4 +1,4 @@
-package me.winflix;
+package me.mozzesdev;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,8 +9,8 @@ import java.util.Set;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import me.winflix.magazine.MagazineCase;
-import me.winflix.notification.Student;
+import me.mozzesdev.magazine.MagazineCase;
+import me.mozzesdev.notification.Student;
 
 public class JsonReader {
     public static Map<String, Set<Student>> readAllStudents(String filePath) throws IOException {

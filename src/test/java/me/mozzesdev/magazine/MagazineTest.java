@@ -1,4 +1,4 @@
-package me.winflix.magazine;
+package me.mozzesdev.magazine;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
