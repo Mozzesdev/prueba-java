@@ -24,7 +24,7 @@ Determinar si una nota puede formarse usando los caracteres de una revista.
 ### 🛠️ Solución
 ```java
 boolean canWrite = Magazine.canWrite("nota", "revista");
-```java
+```
 
 ---
 
