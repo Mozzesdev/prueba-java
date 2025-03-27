@@ -11,7 +11,7 @@ import me.mozzesdev.notification.Student;
 
 public class Main {
     public static void main(String[] args) {
-        // Main.notifyStudents();
+        Main.notifyStudents();
         Main.checkMagazines();
     }
 
