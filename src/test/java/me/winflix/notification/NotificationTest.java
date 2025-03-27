@@ -1,53 +1,59 @@
 package me.winflix.notification;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class NotificationTest {
-    @Test
-    void testNotificationLogic() {
-        // Datos de prueba
-        Set<Student> math = Set.of(
-                new Student("Alice", "Málaga"),
-                new Student("Bob", "Málaga")
-        );
 
-        Set<Student> french = Set.of(
-                new Student("Alice", "Málaga"),
-                new Student("Carlos", "Málaga")
-        );
+        @Test
+        @DisplayName("Verifica la lógica de notificaciones con estudiantes únicos")
+        void testNotificationLogic() {
+                // Datos de prueba
+                Set<Student> math = Set.of(
+                                new Student("Alice", "Málaga"),
+                                new Student("Bob", "Málaga"));
+                Set<Student> french = Set.of(
+                                new Student("Alice", "Málaga"),
+                                new Student("Carlos", "Málaga"));
+                Set<Student> both = Set.of(
+                                new Student("Alice", "Málaga"));
 
-        Set<Student> both = Set.of(
-                new Student("Alice", "Málaga")
-        );
+                // Ejecutar método
+                Map<String, Set<Student>> result = Notification.getStudentsToNotify(math, french, both);
 
-        // Ejecutar método
-        Map<String, Set<Student>> result = Notification.getStudentsToNotify(math, french, both);
+                // Verificaciones agrupadas
+                assertAll("Validación de resultados",
+                                () -> assertEquals(1, result.get("MATHS").size(),
+                                                "Debería haber 1 estudiante para matemáticas"),
+                                () -> assertEquals(1, result.get("FRENCH").size(),
+                                                "Debería haber 1 estudiante para francés"),
+                                () -> assertEquals(1, result.get("BOTH").size(),
+                                                "Debería haber 1 estudiante para ambas asignaturas"),
+                                () -> assertTrue(result.get("MATHS").contains(new Student("Bob", "Málaga")),
+                                                "Bob debería estar en MATHS"),
+                                () -> assertTrue(result.get("FRENCH").contains(new Student("Carlos", "Málaga")),
+                                                "Carlos debería estar en FRENCH"),
+                                () -> assertTrue(result.get("BOTH").contains(new Student("Alice", "Málaga")),
+                                                "Alice debería estar en BOTH"));
+        }
 
-        // Verificaciones
-        assertEquals(1, result.get("MATHS").size());
-        assertEquals(1, result.get("FRENCH").size());
-        assertEquals(1, result.get("BOTH").size());
-        
-        assertTrue(result.get("MATHS").contains(new Student("Bob", "Málaga")));
-        assertTrue(result.get("FRENCH").contains(new Student("Carlos", "Málaga")));
-        assertTrue(result.get("BOTH").contains(new Student("Alice", "Málaga")));
-    }
+        @Test
+        @DisplayName("Filtrado de estudiantes por campus")
+        void testCampusFiltering() {
+                Set<Student> students = Set.of(
+                                new Student("Eva", "Málaga"),
+                                new Student("David", "Madrid"));
 
-    @Test
-    void testCampusFiltering() {
-        Set<Student> students = Set.of(
-                new Student("Eva", "Málaga"),
-                new Student("David", "Madrid")
-        );
+                Set<Student> filtered = Notification.filterByCampus(students, "Málaga");
 
-        Set<Student> filtered = Notification.filterByCampus(students, "Málaga");
-        assertEquals(1, filtered.size());
-        assertTrue(filtered.contains(new Student("Eva", "Málaga")));
-    }
+                assertAll("Validación de filtrado por campus",
+                                () -> assertEquals(1, filtered.size(), "Debería filtrarse 1 estudiante"),
+                                () -> assertTrue(filtered.contains(new Student("Eva", "Málaga")),
+                                                "Eva debería estar en el campus Málaga"));
+        }
 }

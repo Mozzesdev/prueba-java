@@ -12,7 +12,7 @@ import me.winflix.notification.Student;
 public class Main {
     public static void main(String[] args) {
         // Main.notifyStudents();
-        // Main.checkMagazines();
+        Main.checkMagazines();
     }
 
     public static void notifyStudents() {
