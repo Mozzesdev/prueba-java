@@ -1,0 +1,21 @@
+{
+    "math": [
+      {"name": "Alice", "campus": "Málaga"},
+      {"name": "Bob", "campus": "Madrid"},
+      {"name": "Carlos", "campus": "Málaga"},
+      {"name": "Diana", "campus": "Sevilla"},
+      {"name": "Eva", "campus": "Málaga"}
+    ],
+    "french": [
+      {"name": "Alice", "campus": "Málaga"},
+      {"name": "Fernando", "campus": "Barcelona"},
+      {"name": "Gabriela", "campus": "Málaga"},
+      {"name": "Hugo", "campus": "Málaga"},
+      {"name": "Irene", "campus": "Valencia"}
+    ],
+    "both": [
+      {"name": "Alice", "campus": "Málaga"},
+      {"name": "Carlos", "campus": "Málaga"},
+      {"name": "Gabriela", "campus": "Málaga"}
+    ]
+  }

@@ -1,42 +1,53 @@
 package me.winflix.notification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-public class NotificationTest {
-    // Datos de prueba reutilizables
-    private final Student s1 = new Student("Ana", "Málaga"); // Estudiante en Málaga (ambas asignaturas)
-    private final Student s2 = new Student("Luis", "Málaga"); // Estudiante en Málaga (solo francés)
-    private final Student s3 = new Student("Eva", "Madrid"); // Estudiante en Madrid (no afectada)
-
+class NotificationTest {
     @Test
-    void testNotificationGroups() {
-        // 1. Preparación de datos de prueba
-        Set<Student> math = Set.of(s1, s3); // Matemáticas: Ana (Málaga), Eva (Madrid)
-        Set<Student> french = Set.of(s2, s3); // Francés: Luis (Málaga), Eva (Madrid)
-        Set<Student> both = Set.of(s1); // Ambos: Ana (Málaga)
+    void testNotificationLogic() {
+        // Datos de prueba
+        Set<Student> math = Set.of(
+                new Student("Alice", "Málaga"),
+                new Student("Bob", "Málaga")
+        );
 
-        // 2. Ejecución del método bajo prueba
+        Set<Student> french = Set.of(
+                new Student("Alice", "Málaga"),
+                new Student("Carlos", "Málaga")
+        );
+
+        Set<Student> both = Set.of(
+                new Student("Alice", "Málaga")
+        );
+
+        // Ejecutar método
         Map<String, Set<Student>> result = Notification.getStudentsToNotify(math, french, both);
 
-        // 3. Verificaciones (Assertions)
-
-        // Grupo MATHS debería estar vacío porque:
-        // - s1 está en "both" (se elimina de maths)
-        // - s3 está en Madrid (se filtra)
-        assertEquals(0, result.get("MATHS").size());
-
-        // Grupo FRENCH debería contener solo a Luis porque:
-        // - s2 está solo en francés y en Málaga
-        // - s3 está en Madrid (filtrada)
+        // Verificaciones
+        assertEquals(1, result.get("MATHS").size());
         assertEquals(1, result.get("FRENCH").size());
-
-        // Grupo BOTH debería contener solo a Ana porque:
-        // - s1 está en la lista "both" y en Málaga
         assertEquals(1, result.get("BOTH").size());
+        
+        assertTrue(result.get("MATHS").contains(new Student("Bob", "Málaga")));
+        assertTrue(result.get("FRENCH").contains(new Student("Carlos", "Málaga")));
+        assertTrue(result.get("BOTH").contains(new Student("Alice", "Málaga")));
+    }
+
+    @Test
+    void testCampusFiltering() {
+        Set<Student> students = Set.of(
+                new Student("Eva", "Málaga"),
+                new Student("David", "Madrid")
+        );
+
+        Set<Student> filtered = Notification.filterByCampus(students, "Málaga");
+        assertEquals(1, filtered.size());
+        assertTrue(filtered.contains(new Student("Eva", "Málaga")));
     }
 }

@@ -1,0 +1,27 @@
+[
+  {
+    "note": "Hola",
+    "magazine": "Hola, ¿cómo estás?",
+    "expected": true
+  },
+  {
+    "note": "Evacuación segura",
+    "magazine": "En noticias recientes, el gobierno informó que, tras la alerta por inundaciones, se tomó la decisión de garantizar una evacuación segura para todos los ciudadanos. Se recomienda mantener la calma.",
+    "expected": true
+  },
+  {
+    "note": "¡Evacuación inmediata!",
+    "magazine": "El gobierno emitió una alerta por inundaciones. Las autoridades recomiendan la evacuación inmediata a zonas bajas y buscar refugio en centros designados. Mantenga la calma y siga las indicaciones de seguridad.",
+    "expected": false
+  },
+  {
+    "note": "acción",
+    "magazine": "La acción de actuar es importante para lograr cambios significativos.",
+    "expected": true
+  },
+  {
+    "note": "corazón",
+    "magazine": "El corazon de la ciudad late intensamente en cada esquina.",
+    "expected": false
+  }
+]

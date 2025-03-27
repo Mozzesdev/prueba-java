@@ -5,28 +5,34 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Notification {
+    private static final String MALAGA_CAMPUS = "Málaga";
+
     public static Map<String, Set<Student>> getStudentsToNotify(
             Set<Student> mathStudents,
             Set<Student> frenchStudents,
             Set<Student> bothSubjectsStudents) {
 
-        Set<Student> malagaMath = filterByCampus(mathStudents, "Málaga");
-        Set<Student> malagaFrench = filterByCampus(frenchStudents, "Málaga");
-        Set<Student> malagaBoth = filterByCampus(bothSubjectsStudents, "Málaga");
+        Set<Student> malagaMath = filterByCampus(mathStudents, MALAGA_CAMPUS);
+        Set<Student> malagaFrench = filterByCampus(frenchStudents, MALAGA_CAMPUS);
+        Set<Student> malagaBoth = filterByCampus(bothSubjectsStudents, MALAGA_CAMPUS);
 
-        // Eliminar duplicados
-        malagaMath.removeAll(malagaBoth);
-        malagaFrench.removeAll(malagaBoth);
+        Set<Student> finalMath = malagaMath.stream()
+                .filter(student -> !malagaBoth.contains(student))
+                .collect(Collectors.toSet());
+
+        Set<Student> finalFrench = malagaFrench.stream()
+                .filter(student -> !malagaBoth.contains(student))
+                .collect(Collectors.toSet());
 
         return Map.of(
-                "MATHS", malagaMath,
-                "FRENCH", malagaFrench,
+                "MATHS", finalMath,
+                "FRENCH", finalFrench,
                 "BOTH", malagaBoth);
     }
 
-    private static Set<Student> filterByCampus(Set<Student> students, String campus) {
+    public static Set<Student> filterByCampus(Set<Student> students, String campus) {
         return students.stream()
-                .filter(s -> s.getCampus().equalsIgnoreCase(campus))
+                .filter(s -> campus.equalsIgnoreCase(s.getCampus()))
                 .collect(Collectors.toSet());
     }
 }
